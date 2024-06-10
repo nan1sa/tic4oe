@@ -18,10 +18,15 @@ func main() {
 
 		for {
 			fmt.Print("1〜3の範囲で座標を入力してください（例: 2 3）: ")
-
 			_, err := fmt.Scan(&x, &y)
+
 			if err != nil || (x < 1 || x > 3) || (y < 1 || y > 3) {
 				fmt.Println("1〜3の範囲で入力してください")
+				continue
+			}
+
+			if duplicateCheck(inputQueue, x, y) {
+				fmt.Println("座標が重複しています")
 				continue
 			}
 
@@ -39,4 +44,16 @@ func main() {
 
 		fmt.Printf("現在の入力: %+v\n", inputQueue)
 	}
+}
+
+func duplicateCheck(inputQueue []Data, x float64, y float64) bool {
+	var result bool = false
+
+	for _, i := range inputQueue {
+		if x == i.X && y == i.Y {
+			result = true
+		}
+	}
+
+	return result
 }
