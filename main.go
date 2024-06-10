@@ -47,6 +47,16 @@ func main() {
 		fmt.Printf("現在の入力: %+v\n", inputQueue)
 		
 		drawMap(generateMap(inputQueue))
+		
+		if judgement(generateMap(inputQueue), 2 - int(inputCount%2)) {
+			switch data.O {
+				case true:
+					fmt.Println("先攻の勝利です")
+				default:
+					fmt.Println("後攻の勝利です ")
+			}
+			break
+		}
 
 		switch data.O {
 			case true:
@@ -106,4 +116,17 @@ func drawMap(gameMap [][]int) {
 	}
 
 	fmt.Println("")
+}
+
+func judgement(gameMap [][]int, turn int) bool {
+	judgementList := [][]int{{gameMap[0][0], gameMap[0][1], gameMap[0][2]}, {gameMap[1][0], gameMap[1][1], gameMap[1][2]}, {gameMap[2][0], gameMap[2][1], gameMap[2][2]}, {gameMap[0][0], gameMap[1][0], gameMap[2][0]}, {gameMap[0][1], gameMap[1][1], gameMap[2][1]}, {gameMap[0][0], gameMap[1][0], gameMap[2][0]}, {gameMap[0][0], gameMap[1][1], gameMap[2][2]}, {gameMap[0][2], gameMap[1][1], gameMap[2][0]}}
+	result := false
+
+	for _, i := range judgementList {
+		if i[0] == turn && i[1] == turn && i[2] == turn {
+			result = true
+		}
+	}
+
+	return result
 }
