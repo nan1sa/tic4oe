@@ -43,11 +43,13 @@ func main() {
 		}
 
 		fmt.Printf("現在の入力: %+v\n", inputQueue)
+		
+		drawMap(generateMap(inputQueue))
 	}
 }
 
 func duplicateCheck(inputQueue []Data, x float64, y float64) bool {
-	var result bool = false
+	result := false
 
 	for _, i := range inputQueue {
 		if x == i.X && y == i.Y {
@@ -56,4 +58,43 @@ func duplicateCheck(inputQueue []Data, x float64, y float64) bool {
 	}
 
 	return result
+}
+
+func generateMap(inputQueue []Data) [][]int {
+	result := [][]int{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
+
+	for _, i := range inputQueue {
+		iX := int(i.X) - 1
+		iY := int(i.Y) - 1
+
+		if i.O {
+			piece := 1
+			result[iX][iY] = piece
+		} else {
+			piece := 2
+			result[iX][iY] = piece
+		}
+	}
+
+	return result
+}
+
+func drawMap(gameMap [][]int) {
+	fmt.Println("")
+
+	for _, i := range gameMap {
+		for _, j := range i {
+			switch j {
+				case 1:
+					fmt.Print("o")
+				case 2:
+					fmt.Print("x")
+				default:
+					fmt.Print("-")
+			}
+		}
+		fmt.Println("")
+	}
+
+	fmt.Println("")
 }
