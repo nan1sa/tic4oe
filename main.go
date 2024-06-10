@@ -13,6 +13,8 @@ func main() {
 	var inputQueue []Data
 	var inputCount int
 
+	fmt.Print("先攻: ")
+
 	for {
 		var x, y float64
 
@@ -45,6 +47,13 @@ func main() {
 		fmt.Printf("現在の入力: %+v\n", inputQueue)
 		
 		drawMap(generateMap(inputQueue))
+
+		switch data.O {
+			case true:
+				fmt.Print("後攻: ")
+			default:
+				fmt.Print("先攻: ")
+		}
 	}
 }
 
