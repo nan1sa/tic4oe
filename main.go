@@ -58,6 +58,18 @@ func main() {
 			break
 		}
 
+		if len(inputQueue) > 5 {
+			switch data.O {
+				case true:
+					fmt.Printf("\n手持ちの駒を使い切ったため、次に打つ後攻に駒が返却されました\n")
+				default:
+					fmt.Printf("\n手持ちの駒を使い切ったため、次に打つ先攻に駒が返却されました\n")
+			}
+
+			inputQueue = inputQueue[len(inputQueue)-5:]
+			drawMap(generateMap(inputQueue))
+		}
+
 		switch data.O {
 			case true:
 				fmt.Print("後攻: ")
