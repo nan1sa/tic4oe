@@ -94,6 +94,23 @@ func duplicateCheck(inputQueue []Data, x float64, y float64) bool {
 func generateMap(inputQueue []Data) [][]int {
 	result := [][]int{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}
 
+	if len(inputQueue) > 4 {
+		i := inputQueue[0]
+
+		iX := int(i.X) - 1
+		iY := int(i.Y) - 1
+
+		if i.O {
+			piece := 3
+			result[iX][iY] = piece
+		} else {
+			piece := 4
+			result[iX][iY] = piece
+		}
+
+		inputQueue = inputQueue[1:]
+	}
+
 	for _, i := range inputQueue {
 		iX := int(i.X) - 1
 		iY := int(i.Y) - 1
@@ -120,6 +137,10 @@ func drawMap(gameMap [][]int) {
 					fmt.Printf("\x1b[31m%s\x1b[0m", "o")
 				case 2:
 					fmt.Printf("\x1b[34m%s\x1b[0m", "x")
+				case 3:
+					fmt.Printf("%s", "o")
+				case 4:
+					fmt.Printf("%s", "x")
 				default:
 					fmt.Print("-")
 			}
@@ -135,7 +156,7 @@ func judgement(gameMap [][]int, turn int) bool {
 	result := false
 
 	for _, i := range judgementList {
-		if i[0] == turn && i[1] == turn && i[2] == turn {
+		if (i[0] == turn || i[0] == turn + 2) && (i[1] == turn || i[1] == turn + 2) && (i[2] == turn || i[2] == turn + 2) {
 			result = true
 		}
 	}
