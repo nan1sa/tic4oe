@@ -117,9 +117,9 @@ func drawMap(gameMap [][]int) {
 		for _, j := range i {
 			switch j {
 				case 1:
-					fmt.Print("o")
+					fmt.Printf("\x1b[31m%s\x1b[0m", "o")
 				case 2:
-					fmt.Print("x")
+					fmt.Printf("\x1b[34m%s\x1b[0m", "x")
 				default:
 					fmt.Print("-")
 			}
