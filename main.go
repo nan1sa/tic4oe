@@ -40,10 +40,6 @@ func main() {
 
 		inputCount++
 
-		if len(inputQueue) > 6 {
-			inputQueue = inputQueue[len(inputQueue)-6:]
-		}
-
 		fmt.Printf("現在の入力: %+v\n", inputQueue)
 		
 		drawMap(generateMap(inputQueue))
